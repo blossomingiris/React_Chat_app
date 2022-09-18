@@ -1,4 +1,4 @@
-## Chat application (updating)
+## Chat App
 
 <!--
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -18,36 +18,40 @@ Once the project moves into development, the press release can be used as a touc
 
 ## Heading
 
-Messages
+'Messages'
 
 ## Sub-Heading
 
-Messages allows to communicate with another people through chat. It enables to send and receive messages.
+Group chat application
 
 ## Summary
 
-> Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+'Messages' is social networking and real-time communication tool with simple-to-use functionality. With 'Messages' application users are able to receive the same engaging and lively interactions, just as they would in person. 
 
 ## Problem
 
-> Describe the problem your product solves.
+Users should be able to send group messages instantly, easily and in real time via web.
 
 ## Solution
 
-> Describe how your product elegantly solves the problem.
+'Messages' benefits: 
+- user sends a message in real-time
+- user receives in real-time
+- user have conversation window with sent and received messages clearly distinguished from each other and ordered chronologically
+- user have history of past messages
+- robust (app has registration/login page and user authentication mechanism)
 
 ## Quote from You
 
-> A quote from a spokesperson in your company.
+'Messagess' can be used for different goals for: buisness, team collaboration, family/friends communication etc.
 
 ## How to Get Started
 
-> Describe how easy it is to get started.
+> It's easy to get started to use 'Messages':
+1. Create an account 
+2. Send message to chat
 
 ## Customer Quote
 
-> Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+'It's nice to have such convenient access to chat within Gmail, is comfortable to use for business or personal use with clear UI. Group chat with friends & family, and enjoy the great time'
 
-## Closing and Call to Action
-
-> Wrap it up and give pointers where the reader should go next.
