@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { auth, db } from '../../firebase'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 
-function SendMessage({ scroll }) {
+function SendMessage({  }) {
   const [input, setInput] = useState('')
 
   const sendMessage = async (e) => {
@@ -21,7 +21,6 @@ function SendMessage({ scroll }) {
       timestamp: serverTimestamp(),
     })
     setInput('')
-    scroll.current.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
@@ -42,20 +41,5 @@ function SendMessage({ scroll }) {
     </form>
   )
 }
-
-// function SendMessage() {
-//   return (
-//     <div className='input flex items-center justify-between h-[60px] bg-stone-200 p-2'>
-//       <input
-//         type='text'
-//         placeholder='Type message..'
-//         className='send bg-stone-200 w-[100%] text-[0.75em] border-none focus:outline-0 '
-//       />
-//       <button className='text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg text-[0.75em] px-3.5 py-1.5 text-center transition duration-150 ease-in-out'>
-//         Send
-//       </button>
-//     </div>
-//   )
-// }
 
 export default SendMessage

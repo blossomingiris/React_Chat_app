@@ -50,6 +50,7 @@ function Register() {
       navigate('/chats')
     } catch (error) {
       setErrorMessage('Failed to create an account')
+      console.log(error)
     }
     setLoading(true)
   }

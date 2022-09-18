@@ -7,7 +7,9 @@ import Navbar from './Navbar'
 
 function Chat() {
   const [messages, setMessages] = useState([])
-  const scroll = useRef(null)
+
+  //scrolling to last message in chat
+  const scroll = useRef()
 
   //fetch messages from db
   useEffect(() => {
@@ -24,11 +26,11 @@ function Chat() {
 
   return (
     <div className='flex items-center justify-center h-screen bg-gradient-to-r from-[#feac5e] via-[#c779d0] to-[#4BC0C8]'>
-      <div className='bg-gray-100 h-[90%] relative w-[60%]'>
+      <div className='bg-gray-100 h-[90%] relative w-[50%] '>
         <Navbar />
         <div
-          className='msgs flex flex-col ml-[10px] h-[80%]
-					overflow-x-scroll'
+          className='flex flex-col ml-[10px] h-[80%] overflow-x-scroll
+					'
         >
           {messages &&
             messages.map((message) => (
@@ -36,7 +38,7 @@ function Chat() {
             ))}
         </div>
         <SendMessage scroll={scroll} />
-        <div ref={scroll}></div>
+        <div ref={scroll} />
       </div>
     </div>
   )
