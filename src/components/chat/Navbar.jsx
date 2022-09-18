@@ -11,18 +11,18 @@ function Navbar() {
       <span className='uppercase text-transparent bg-clip-text text-base bg-gradient-to-br from-purple-500 to-pink-500 font-bold mr-3'>
         Messages
       </span>
-      <div>
+      <div className='flex items-center'>
         {' '}
         <img
-          src={currentUser.photoURL ? currentUser.photoURL : profileImg}
-          // src={user.photoURL}
+          src={currentUser.photoURL || profileImg}
           alt='avatar'
           className='h-[30px] w-[30px] rounded-full bg-grey-100 object-cover'
         />
+        <p className='text-white text-[14px] ml-2 capitalize'>
+          {currentUser.displayName}
+        </p>
       </div>
-      <p className='text-white text-[14px] mr-3 capitalize'>
-        {currentUser.displayName}
-      </p>
+
       <Logout />
     </div>
   )

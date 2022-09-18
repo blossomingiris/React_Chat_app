@@ -87,14 +87,14 @@ function Login() {
               <input
                 type='text'
                 className='form-control block w-full px-3 py-1 mb-3 text-[16px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-[#a98ace] focus:outline-none'
-                placeholder='Email address..'
+                placeholder='Email address'
                 required
               />
 
               <input
                 type='password'
                 className='form-control block w-full px-3 py-1 mb-3 text-[16px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-[#a98ace] focus:outline-none'
-                placeholder='Password..'
+                placeholder='Password'
                 required
               />
 
