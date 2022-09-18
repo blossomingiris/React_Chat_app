@@ -1,9 +1,10 @@
 import { Routes, Route } from 'react-router-dom'
-import { UserAuthContextProvider } from '../contexts/UserAuthContext'
+import { UserAuthContextProvider } from '../context/UserAuthContext'
 import { ProtectedRoute } from '../other/ProtectedRouter'
-import Register from '../components/Register'
-import Chats from '../components/Chats'
-import Login from '../components/Login'
+import Register from '../components/authentication/Register'
+import Chat from '../components/chat/Chat'
+import Login from '../components/authentication/Login'
+import ForgotPassword from '../components/authentication/ForgotPassword'
 
 function App() {
   return (
@@ -11,12 +12,13 @@ function App() {
       <Routes>
         <Route path='/' element={<Register />} />
         <Route path='login' element={<Login />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
 
         <Route
           path='/chats'
           element={
             <ProtectedRoute>
-              <Chats />
+              <Chat />
             </ProtectedRoute>
           }
         />

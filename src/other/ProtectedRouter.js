@@ -1,9 +1,9 @@
 import { Navigate } from 'react-router-dom'
-import { useUserAuth } from '../contexts/UserAuthContext'
+import { useUserAuth } from '../context/UserAuthContext'
 
 export const ProtectedRoute = ({ children }) => {
-  const { user } = useUserAuth()
-  if (!user) {
+  const { currentUser } = useUserAuth()
+  if (!currentUser) {
     // user is not authenticated
     return <Navigate to='/' />
   }

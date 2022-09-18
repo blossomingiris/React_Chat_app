@@ -1,112 +1,97 @@
 import { FaGoogle, FaFacebookF } from 'react-icons/fa'
 import { useNavigate, Link } from 'react-router-dom'
-import { useUserAuth } from '../contexts/UserAuthContext'
+import { useUserAuth } from '../../context/UserAuthContext'
 import { useState } from 'react'
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
-import { auth, db } from '.././firebase'
+import { updateProfile } from 'firebase/auth'
+import { db } from '../../firebase'
 import { doc, setDoc } from 'firebase/firestore'
 
 function Register() {
-  const { signInGoogle, googleSignIn } = useUserAuth()
-  const { signInFacebook, facebookSignIn } = useUserAuth()
-  const [error, setError] = useState(false)
+  const { googleSignIn } = useUserAuth()
+  const { facebookSignIn } = useUserAuth()
+  const { signUp } = useUserAuth()
+  const [errorMessage, setErrorMessage] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   //auth with Google
   const handleGoogleSignIn = async (e) => {
     e.preventDefault()
     try {
+      setErrorMessage('')
+      setLoading(false)
       const res = await googleSignIn()
       await setDoc(doc(db, 'users', res.user.uid), {
         uid: res.user.uid,
         displayName: res.user.displayName,
         email: res.user.email,
+        photoURL: res.user.photoURL,
       })
-      await setDoc(doc(db, 'userChats', res.user.uid), {})
       navigate('/chats')
     } catch (error) {
-      console.log(error.message)
+      setErrorMessage('Failed to create an account')
     }
+    setLoading(true)
   }
 
   //auth with Facebook
   const handleFacebookSignIn = async (e) => {
     e.preventDefault()
     try {
+      setErrorMessage('')
+      setLoading(false)
       const res = await facebookSignIn()
       await setDoc(doc(db, 'users', res.user.uid), {
         uid: res.user.uid,
         displayName: res.user.displayName,
         email: res.user.email,
+        photoURL: res.user.photoURL,
       })
-      await setDoc(doc(db, 'userChats', res.user.uid), {})
       navigate('/chats')
     } catch (error) {
-      console.log(error.message)
+      setErrorMessage('Failed to create an account')
     }
+    setLoading(true)
   }
 
   //auth with username & password
 
-  //
   const handleSubmit = async (e) => {
     e.preventDefault()
+
     const displayName = e.target[0].value
     const email = e.target[1].value
     const password = e.target[2].value
+    const password_confirm = e.target[3].value
+
+    if (password !== password_confirm) {
+      return setErrorMessage('Passwords do not match!')
+    }
 
     try {
-      const res = await createUserWithEmailAndPassword(auth, email, password)
+      setErrorMessage('')
+      setLoading(true)
+      const res = await signUp(email, password)
+      await updateProfile(res.user, {
+        displayName,
+      })
+
       await setDoc(doc(db, 'users', res.user.uid), {
         uid: res.user.uid,
         displayName,
         email,
       })
-      await setDoc(doc(db, 'userChats', res.user.uid), {})
       navigate('/chats')
     } catch (error) {
-      setError(true)
+      setErrorMessage('Failed to create an account')
     }
+    setLoading(false)
   }
-  //   try {
-  //     //Create user
-  //     const res = await createUserWithEmailAndPassword(auth, email, password)
-
-  //     //Create a unique image name
-  //     // const date = new Date().getTime();
-  //     // const storageRef = ref(storage, `${displayName + date}`);
-
-  //     // await uploadBytesResumable(storageRef, file).then(() => {
-  //     //   getDownloadURL(storageRef).then(async (downloadURL) => {
-  //     //     try {
-  //     //Update profile
-  //     await updateProfile(res.user, {
-  //       displayName,
-  //     })
-
-  //     //create user on firestore
-  //     await setDoc(doc(db, 'users', res.user.uid), {
-  //       uid: res.user.uid,
-  //       displayName,
-  //       email,
-  //     })
-
-  //     //create empty user chats on firestore
-  //     //   await setDoc(doc(db, 'userChats', res.user.uid), {});
-  //     //   navigate("/");
-  //     // } catch (error) {
-  //     //   console.log(error);
-  //     //   setError(true);
-  //     // }
-  //   } catch (error) {
-  //     setError(true)
-  //   }
-  // }
 
   return (
     <div className='flex items-center justify-center h-screen bg-gradient-to-r from-[#feac5e] via-[#c779d0] to-[#4BC0C8] ...'>
-      <div className='rounded-lg shadow-lg bg-white max-w-lg '>
-        <div className='flex py-6 px-9 items-center gap-3'>
+      <div className='rounded-lg shadow-lg bg-white max-w-lg'>
+        <div className='flex py-3 px-9 items-center gap-3'>
           <div>
             <div className='mb-4 text-center'>
               {' '}
@@ -119,34 +104,44 @@ function Register() {
               <input
                 type='text'
                 className='form-control block w-full px-3 py-1 mb-3 text-[16px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-[#a98ace] focus:outline-none'
-                placeholder='Username'
+                placeholder='Username..'
+                required
               />
 
               <input
                 type='text'
                 className='form-control block w-full px-3 py-1 mb-3 text-[16px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-[#a98ace] focus:outline-none'
-                placeholder='Email address'
+                placeholder='Email address..'
+                required
               />
 
               <input
                 type='password'
                 className='form-control block w-full px-3 py-1 mb-3 text-[16px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-[#a98ace] focus:outline-none'
-                placeholder='Password'
+                placeholder='Password..'
+                required
               />
+
+              <input
+                type='password'
+                className='form-control block w-full px-3 py-1 mb-3 text-[16px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-[#a98ace] focus:outline-none'
+                placeholder='Confirm password'
+                required
+              />
+
+              {errorMessage && (
+                <p className='text-center text-[0.65em] py-1 text-rose-600 mt-[-0.9em] mb-1'>
+                  {errorMessage}
+                </p>
+              )}
 
               <button
                 type='submit'
                 className='inline-block px-4 py-2.5 bg-blue-600 text-white text-[14px] leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full'
-                data-mdb-ripple='true'
-                data-mdb-ripple-color='light'
+                disabled={loading}
               >
                 Sign in
               </button>
-              {error && (
-                <p className='text-center text-[0.65em] py-1 text-rose-600'>
-                  Something went wrong. Try again.
-                </p>
-              )}
             </form>
 
             <div className='flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5'>
@@ -174,8 +169,8 @@ function Register() {
               </button>
             </div>
             <p className='text-zinc-700 text-xs text-center mt-3'>
-              Do you have account?{' '}
-              <Link to='/login' className='text-[#c779cf]'>
+              Already have an account?{' '}
+              <Link to='/login' className='text-[#c779cf] hover:underline'>
                 Login
               </Link>
             </p>

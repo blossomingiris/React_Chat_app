@@ -1,61 +1,74 @@
 import { FaGoogle, FaFacebookF } from 'react-icons/fa'
 import { useNavigate, Link } from 'react-router-dom'
-import { useUserAuth } from '../contexts/UserAuthContext'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { db } from '.././firebase'
+import { useUserAuth } from '../../context/UserAuthContext'
+import { useState } from 'react'
+import { db } from '../../firebase'
 import { doc, setDoc } from 'firebase/firestore'
-import { auth } from '.././firebase'
 
 function Login() {
-  const { logInGoogle, googleSignIn } = useUserAuth()
-  const { loginFB, facebookSignIn } = useUserAuth()
+  const { googleSignIn } = useUserAuth()
+  const { facebookSignIn } = useUserAuth()
+  const { logIn } = useUserAuth()
   const navigate = useNavigate()
+  const [errorMessage, setErrorMessage] = useState('')
+  const [loading, setLoading] = useState(false)
 
   //auth with Google
   const handleGoogleSignIn = async (e) => {
     e.preventDefault()
     try {
+      setErrorMessage('')
+      setLoading(false)
       const res = await googleSignIn()
       await setDoc(doc(db, 'users', res.user.uid), {
         uid: res.user.uid,
         displayName: res.user.displayName,
         email: res.user.email,
+        photoURL: res.user.photoURL,
       })
       navigate('/chats')
     } catch (error) {
-      console.log(error.message)
+      setErrorMessage('Failed to create an account')
     }
+    setLoading(true)
   }
 
   //auth with Facebook
   const handleFacebookSignIn = async (e) => {
     e.preventDefault()
     try {
+      setErrorMessage('')
+      setLoading(false)
       const res = await facebookSignIn()
       await setDoc(doc(db, 'users', res.user.uid), {
         uid: res.user.uid,
         displayName: res.user.displayName,
         email: res.user.email,
+        photoURL: res.user.photoURL,
       })
       navigate('/chats')
     } catch (error) {
-      console.log(error.message)
+      setErrorMessage('Failed to create an account')
     }
+    setLoading(true)
   }
 
-  //auth with username & password
+  //auth with password und email
 
   const handleSubmit = async (e) => {
+    setErrorMessage('')
+    setLoading(false)
     e.preventDefault()
     const email = e.target[0].value
     const password = e.target[1].value
 
     try {
-      await signInWithEmailAndPassword(auth, email, password)
-      navigate('/')
+      await logIn(email, password)
+      navigate('/chats')
     } catch (error) {
-      console.log(error)
+      setErrorMessage('Failed to login')
     }
+    setLoading(true)
   }
 
   return (
@@ -74,24 +87,35 @@ function Login() {
               <input
                 type='text'
                 className='form-control block w-full px-3 py-1 mb-3 text-[16px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-[#a98ace] focus:outline-none'
-                placeholder='Email address'
+                placeholder='Email address..'
+                required
               />
 
               <input
                 type='password'
                 className='form-control block w-full px-3 py-1 mb-3 text-[16px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-[#a98ace] focus:outline-none'
-                placeholder='Password'
+                placeholder='Password..'
+                required
               />
+
+              {errorMessage && (
+                <p className='text-center text-[0.65em] py-1 text-rose-600 mt-[-0.9em] mb-1'>
+                  {errorMessage}
+                </p>
+              )}
 
               <button
                 type='submit'
                 className='inline-block px-4 py-2.5 bg-blue-600 text-white text-[14px] leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full'
-                data-mdb-ripple='true'
-                data-mdb-ripple-color='light'
+                disabled={loading}
               >
                 Sign in
               </button>
             </form>
+
+            <p className='text-zinc-700 text-xs text-center mt-3 hover:underline'>
+              <Link to='/forgot-password'>Forget your password?</Link>
+            </p>
 
             <div className='flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5'>
               <p className='text-center text-sm mx-4 mb-0'>OR</p>
@@ -118,8 +142,8 @@ function Login() {
               </button>
             </div>
             <p className='text-zinc-700 text-xs text-center mt-3'>
-              Don't have account?{' '}
-              <Link className='text-[#c779cf]' to='/'>
+              Don't have an account?{' '}
+              <Link className='text-[#c779cf] hover:underline' to='/'>
                 Register
               </Link>
             </p>
