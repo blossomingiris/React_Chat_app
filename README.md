@@ -53,5 +53,5 @@ Users should be able to send group messages instantly, easily and in real time v
 
 ## Customer Quote
 
-'It's nice to have such convenient access to chat within Gmail, is comfortable to use for business or personal use with clear UI. Group chat with friends & family, and enjoy the great time'
+'It's nice to have such convenient access to chat within Google, is comfortable to use for business or personal use with clear UI. Group chat with friends & family, and enjoy the great time'
 
