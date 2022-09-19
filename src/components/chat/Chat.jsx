@@ -26,10 +26,10 @@ function Chat() {
 
   return (
     <div className='flex items-center justify-center h-screen bg-gradient-to-r from-[#feac5e] via-[#c779d0] to-[#4BC0C8]'>
-      <div className='bg-gray-100 h-[90%] relative w-[50%] '>
+      <div className='bg-gray-100 h-[90%] relative w-[40%] '>
         <Navbar />
         <div
-          className='flex flex-col ml-[10px] h-[80%] overflow-x-scroll
+          className='flex flex-col ml-[10px] h-[85%] overflow-x-scroll
 					'
         >
           {messages &&

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { auth, db } from '../../firebase'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 
-function SendMessage({  }) {
+function SendMessage({}) {
   const [input, setInput] = useState('')
 
   const sendMessage = async (e) => {
@@ -29,12 +29,12 @@ function SendMessage({  }) {
         type='text'
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className='w-full bg-stone-200 w-[100%] text-[0.75em] border-none focus:outline-0 px-3'
+        className='w-full bg-stone-200 w-[100%] text-[0.8em] border-none focus:outline-0 px-3'
         placeholder='Type your message..'
       />
       <button
         type='submit'
-        className='text-white px-4 py-2.5 text-[0.75em] bg-blue-400 text-white leading-tight shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out'
+        className='text-white px-4 py-2.5 text-[0.85em] bg-blue-400 text-white leading-tight shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out'
       >
         Send
       </button>

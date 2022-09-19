@@ -38,31 +38,31 @@ function ForgotPassword() {
               <h3 className='mb-2 uppercase text-[1.5em] font-semibold text-transparent bg-clip-text bg-gradient-to-br from-purple-500 to-pink-500'>
                 Messages
               </h3>
-              <h3 className='text-zinc-700 text-xs'>Password reset</h3>
+              <h3 className='text-zinc-700 text-sm'>Password reset</h3>
             </div>
             <form onSubmit={handleSubmit}>
               <input
                 type='email'
-                className='form-control block w-full px-3 py-1 mb-3 text-[16px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-[#a98ace] focus:outline-none'
+                className='form-control block w-full px-4 py-2 mb-3 text-[16px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-[#a98ace] focus:outline-none'
                 placeholder='Email address'
                 required
               />
 
               {errorMessage && (
-                <p className='text-center text-[0.65em] pb-2 py-1 text-rose-600 mt-[-0.9em] mb-1'>
+                <p className='text-center text-[0.75em] pb-2 py-1 text-rose-600 mt-[-0.9em] mb-1'>
                   {errorMessage}
                 </p>
               )}
 
               {message && (
-                <p className='text-center text-[0.65em] pb-2 py-1 text-green-600 mt-[-0.9em] mb-1'>
+                <p className='text-center text-[0.75em] pb-2 py-1 text-green-600 mt-[-0.9em] mb-1'>
                   {message}
                 </p>
               )}
 
               <button
                 type='submit'
-                className='px-3 py-2.5 bg-blue-600 text-white text-[14px] leading-snug rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full'
+                className='px-3 py-2.5 bg-blue-600 text-white text-sm leading-snug rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full'
                 disabled={loading}
               >
                 Reset password
