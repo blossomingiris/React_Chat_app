@@ -39,7 +39,8 @@ Users should be able to send group messages instantly, easily and in real time v
 - user receives a message in real-time
 - user have conversation window with sent and received messages clearly distinguished from each other and ordered chronologically
 - user have history of past messages
-- robust (app has registration/login page and user authentication mechanism)
+- for authorized users
+- personalisation (user have username and avatar from Google/FB accounts).
 
 ## Quote from You
 
