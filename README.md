@@ -36,7 +36,7 @@ Users should be able to send group messages instantly, easily and in real time v
 
 'Messages' benefits: 
 - user sends a message in real-time
-- user receives in real-time
+- user receives a message in real-time
 - user have conversation window with sent and received messages clearly distinguished from each other and ordered chronologically
 - user have history of past messages
 - robust (app has registration/login page and user authentication mechanism)
