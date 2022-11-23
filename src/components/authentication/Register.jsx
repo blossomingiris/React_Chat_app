@@ -14,48 +14,7 @@ function Register() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
-  //auth with Google
-  const handleGoogleSignIn = async (e) => {
-    e.preventDefault()
-    try {
-      setErrorMessage('')
-      setLoading(false)
-      const res = await googleSignIn()
-      await setDoc(doc(db, 'users', res.user.uid), {
-        uid: res.user.uid,
-        displayName: res.user.displayName,
-        email: res.user.email,
-        photoURL: res.user.photoURL,
-      })
-      navigate('/chats')
-    } catch (error) {
-      setErrorMessage('Failed to create an account')
-    }
-    setLoading(true)
-  }
-
-  //auth with Facebook
-  const handleFacebookSignIn = async (e) => {
-    e.preventDefault()
-    try {
-      setErrorMessage('')
-      setLoading(false)
-      const res = await facebookSignIn()
-      await setDoc(doc(db, 'users', res.user.uid), {
-        uid: res.user.uid,
-        displayName: res.user.displayName,
-        email: res.user.email,
-        photoURL: res.user.photoURL,
-      })
-      navigate('/chats')
-    } catch (error) {
-      setErrorMessage('Failed to create an account')
-      console.log(error)
-    }
-    setLoading(true)
-  }
-
-  //auth with username & password
+  //sign up with username & password
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -76,7 +35,6 @@ function Register() {
       await updateProfile(res.user, {
         displayName,
       })
-
       await setDoc(doc(db, 'users', res.user.uid), {
         uid: res.user.uid,
         displayName,
@@ -84,13 +42,59 @@ function Register() {
       })
       navigate('/chats')
     } catch (error) {
-      setErrorMessage('Failed to create an account')
+      const errorCode = error.code
+      if (errorCode === 'auth/email-already-in-use') {
+        setErrorMessage('This email already exists')
+      } else {
+        setErrorMessage('Something went wrong')
+      }
     }
     setLoading(false)
   }
 
+  //sign up with Google
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault()
+    try {
+      setErrorMessage('')
+      setLoading(false)
+      const res = await googleSignIn()
+      await setDoc(doc(db, 'users', res.user.uid), {
+        uid: res.user.uid,
+        displayName: res.user.displayName,
+        email: res.user.email,
+        photoURL: res.user.photoURL,
+      })
+      navigate('/chats')
+    } catch (error) {
+      setErrorMessage('Something went wrong')
+    }
+    setLoading(true)
+  }
+
+  //sign up with Facebook
+  const handleFacebookSignIn = async (e) => {
+    e.preventDefault()
+    try {
+      setErrorMessage('')
+      setLoading(false)
+      const res = await facebookSignIn()
+
+      await setDoc(doc(db, 'users', res.user.uid), {
+        uid: res.user.uid,
+        displayName: res.user.displayName,
+        email: res.user.email,
+        photoURL: res.user.photoURL,
+      })
+      navigate('/chats')
+    } catch (error) {
+      setErrorMessage('Something went wrong')
+    }
+    setLoading(true)
+  }
+
   return (
-    <div className='flex items-center justify-center h-screen bg-gradient-to-r from-[#feac5e] via-[#c779d0] to-[#4BC0C8] ...'>
+    <div className='flex items-center justify-center h-screen'>
       <div className='rounded-lg shadow-lg bg-white max-w-lg'>
         <div className='flex py-5 px-10 items-center gap-3'>
           <div>
@@ -110,7 +114,7 @@ function Register() {
               />
 
               <input
-                type='text'
+                type='email'
                 className='form-control block w-full px-4 py-2 mb-3 text-[16px] font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-[#a98ace] focus:outline-none'
                 placeholder='Email address'
                 required
@@ -141,7 +145,7 @@ function Register() {
                 className=' px-4 py-3 text-[0.8em] bg-blue-600 text-white leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full'
                 disabled={loading}
               >
-                Sign in
+                Sign Up
               </button>
             </form>
 
@@ -149,7 +153,7 @@ function Register() {
               <p className='text-center text-sm mx-4 mb-0'>OR</p>
             </div>
 
-            <div div className='flex flex-col justify-center '>
+            <div className='flex flex-col justify-center '>
               <button
                 type='button'
                 data-mdb-ripple='true'
@@ -157,7 +161,7 @@ function Register() {
                 className='flex justify-evenly mb-2.5 align-middle px-4 py-3 text-[0.8em] bg-[#de4a39] text-white leading-tight  rounded shadow-md hover:bg-[#a8372a] hover:shadow-lg focus:bg-[#a8372a] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-[#963126] active:shadow-lg transition duration-150 ease-in-out'
                 onClick={handleGoogleSignIn}
               >
-                <FaGoogle /> <p>Sign In with Google</p>
+                <FaGoogle /> <p>Sign Up with Google</p>
               </button>
               <button
                 type='button'
@@ -166,13 +170,13 @@ function Register() {
                 className='flex justify-evenly gap-2 align-middle px-4 py-3 text-[0.8em] bg-[#3b5998] text-white leading-tight rounded shadow-md hover:bg-[#31497d] hover:shadow-lg focus:bg-[#31497d] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-[#2a3e6b] active:shadow-lg transition duration-150 ease-in-out'
                 onClick={handleFacebookSignIn}
               >
-                <FaFacebookF /> <p>Sign In with Facebook </p>
+                <FaFacebookF /> <p>Sign Up with Facebook </p>
               </button>
             </div>
             <p className='text-zinc-700 text-xs text-center mt-3'>
               Already have an account?{' '}
               <Link to='/login' className='text-[#c779cf] hover:underline'>
-                Login
+                Log In
               </Link>
             </p>
           </div>

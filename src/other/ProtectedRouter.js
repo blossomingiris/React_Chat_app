@@ -4,7 +4,7 @@ import { useUserAuth } from '../context/UserAuthContext'
 export const ProtectedRoute = ({ children }) => {
   const { currentUser } = useUserAuth()
   if (!currentUser) {
-    // user is not authenticated
+    // if user is not authenticated navigate to home page
     return <Navigate to='/' />
   }
   return children

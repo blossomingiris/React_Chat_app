@@ -72,7 +72,7 @@ function Login() {
   }
 
   return (
-    <div className='flex items-center justify-center h-screen bg-gradient-to-r from-[#feac5e] via-[#c779d0] to-[#4BC0C8] ...'>
+    <div className='flex items-center justify-center h-screen'>
       <div className='rounded-lg shadow-lg bg-white max-w-lg '>
         <div className='flex py-5 px-10 items-center gap-3'>
           <div>
@@ -81,7 +81,7 @@ function Login() {
               <h3 className='mb-2 uppercase text-[1.5em]  font-semibold text-transparent bg-clip-text bg-gradient-to-br from-purple-500 to-pink-500'>
                 Messages
               </h3>
-              <h3 className='text-zinc-700 text-xs'>Login</h3>
+              <h3 className='text-zinc-700 text-xs'>Log In</h3>
             </div>
             <form onSubmit={handleSubmit}>
               <input
@@ -121,7 +121,7 @@ function Login() {
               <p className='text-center text-sm mx-4 mb-0'>OR</p>
             </div>
 
-            <div div className='flex flex-col justify-center '>
+            <div className='flex flex-col justify-center '>
               <button
                 type='button'
                 data-mdb-ripple='true'

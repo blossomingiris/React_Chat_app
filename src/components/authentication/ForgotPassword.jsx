@@ -29,7 +29,7 @@ function ForgotPassword() {
   }
 
   return (
-    <div className='flex items-center justify-center h-screen bg-gradient-to-r from-[#feac5e] via-[#c779d0] to-[#4BC0C8] ...'>
+    <div className='flex items-center justify-center h-screen'>
       <div className='rounded-lg shadow-lg bg-white max-w-lg '>
         <div className='flex py-6 px-8 items-center gap-3'>
           <div>
@@ -70,7 +70,7 @@ function ForgotPassword() {
             </form>
 
             <p className='text-zinc-700 text-xs text-center mt-3 hover:underline'>
-              <Link to='/login'>back to Login page</Link>
+              <Link to='/login'>Back to Log In page</Link>
             </p>
           </div>
         </div>
