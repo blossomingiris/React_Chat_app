@@ -1,5 +1,4 @@
-<img src="https://user-images.githubusercontent.com/102720711/203571851-5966252e-afc4-43e4-968d-16d5cf8da095.png"/> 
-
+<img src="https://user-images.githubusercontent.com/102720711/203572288-4cd8424c-b518-4135-be1b-20d8eb38b77d.png"/> 
 
 ## Chat application (React)
 
@@ -7,6 +6,7 @@
 Functionality: 
 :heavy_check_mark: full stack project built with React, Firebase and TailwindCss<br />
 :heavy_check_mark: demo is [here]
+
 
 ## What you can do with this app?
 - create an account or login with your Google or Facebook account
