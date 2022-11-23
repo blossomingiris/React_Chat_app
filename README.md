@@ -2,8 +2,7 @@
 
 ## Chat application (React)
 
-:heavy_check_mark: chat app is a social networking and real-time communication tool with simple-to-use functionality.
-Functionality: 
+:heavy_check_mark: chat app is a social networking and real-time communication tool with simple-to-use functionality<br />
 :heavy_check_mark: full stack project built with React, Firebase and TailwindCss<br />
 :heavy_check_mark: demo is [here]
 
