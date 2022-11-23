@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/102720711/203571851-5966252e-afc4-43e4-968d-16d5cf8da095.png" width="400" height="400" align="right" /> 
+<img src="https://user-images.githubusercontent.com/102720711/203571851-5966252e-afc4-43e4-968d-16d5cf8da095.png"/> 
 
 
 ## Chat application (React)
