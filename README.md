@@ -1,9 +1,10 @@
 <img src="https://user-images.githubusercontent.com/102720711/203572288-4cd8424c-b518-4135-be1b-20d8eb38b77d.png"/> 
 
-# Chat application (React)
+# Messages (React)
+Chat application
 
 ## Description:
-Chat app is a social networking and real-time communication tool with simple-to-use functionality<br />
+"Messages" is a social networking and real-time communication tool with simple-to-use functionality<br />
 
 ## Technologies: 
 - HTML
@@ -14,7 +15,7 @@ Chat app is a social networking and real-time communication tool with simple-to-
 ## Demo: 
 [Here](https://messages-b4e24.firebaseapp.com/)
 
-## What you can do with this app?
+## How you can use this app?
 - create an account or login with your Google or Facebook account
 - restore you password if you forgot it 
 - send a message in real-time
